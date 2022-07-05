@@ -6,19 +6,19 @@
             <button type="button" class="btn btn-warning" @click.prevent="isHide">关闭</button>
             <form action="" id="form">
                 <div>
-                    <span>ID :</span> <input type="text" class="form-control" id="exampleInputEmail1"
+                    <span>ID :</span> <input type="text" class="form-control" id="exampleInputEmail1" readonly="true"
                         v-model.trim="maskData.id">
                 </div>
                 <div>
-                    <span>书名 :</span> <input type="text" class="form-control" id="exampleInputEmail1"
+                    <span>书名 :</span> <input type="text" class="form-control" id="exampleInputEmail1" readonly="true"
                         v-model.trim="maskData.bookname">
                 </div>
                 <div>
-                    <span>作者 :</span> <input type="text" class="form-control" id="exampleInputEmail1"
+                    <span>作者 :</span> <input type="text" class="form-control" id="exampleInputEmail1" readonly="true"
                         v-model.trim="maskData.author">
                 </div>
                 <div>
-                    <span>出版社 :</span> <input type="text" class="form-control" id="exampleInputEmail1"
+                    <span>出版社 :</span> <input type="text" class="form-control" id="exampleInputEmail1" readonly="true"
                         v-model.trim="maskData.publisher">
                 </div>
             </form>
@@ -89,5 +89,12 @@ export default {
 input {
     display: inline-block;
     width: 70%;
+}
+
+.form-control:focus {
+    /* border: 0 !important; */
+    color: #212529 !important;
+    border-color: #ced4da !important;
+    box-shadow: none !important;
 }
 </style>
