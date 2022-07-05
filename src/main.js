@@ -3,6 +3,14 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+
+// 引入css样式
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+// 引入bootstrap
+import axios from 'axios'
+axios.defaults.baseURL = 'http://www.liulongbin.top:3006'
+Vue.prototype.$axios = axios
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')
