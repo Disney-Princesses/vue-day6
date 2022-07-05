@@ -1,28 +1,60 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <Main :list="newList" @changeList="changeList"></Main>
+    <Footer @addbook="addbookFn"></Footer>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import Main from "./components/Main.vue";
+import Footer from "./components/Footer.vue";
 export default {
-  name: 'App',
   components: {
-    HelloWorld
-  }
-}
+    Main,
+    Footer,
+  },
+  data() {
+    return {
+      list: [],
+      newList: [],
+    };
+  },
+  mounted() {
+    this.getbook();
+  },
+  methods: {
+    addbookFn(val) {
+      this.$axios({
+        method: "POST",
+        url: "/api/addbook",
+        data: {
+          ...val,
+        },
+      }).then((res) => {
+        if (res.data.status == 201) {
+            this.getbook();
+        }
+      });
+    },
+    getbook() {
+      this.$axios({
+        method: "GET",
+        url: "/api/getbooks",
+      }).then((res) => {
+        this.list = res.data["data"];
+        this.newList = this.list;
+      });
+    },
+    changeList(bookname) {
+      if (this.list.filter((ele) => ele.bookname == bookname).length == 0) {
+        return alert("没有找到该书");
+      }
+      this.newList = this.list.filter((ele) => ele.bookname == bookname);
+    },
+  },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
 </style>
