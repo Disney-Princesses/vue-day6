@@ -53,7 +53,6 @@ export default {
       bookname: "",
       author: "",
       publisher: "",
-      timer: ""
     };
   },
   methods: {
@@ -74,12 +73,9 @@ export default {
           publisher: this.publisher
         }
       }).then(res => {
-        // this.list=res
+        location.reload(true)
       });
-      //   console.log(this.$refs.myA);
       this.$refs.myA.disabled = true;
-      this.timer = setInterval(function() {}, 3000);
-      clearInterval(this.timer);
     }
   }
 };

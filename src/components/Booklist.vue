@@ -24,7 +24,16 @@
         </tr>
       </tbody>
     </table>
-    <div id="detals" ref="myD" v-show="show" @click="{show=!show}"></div>
+    <div id="detals" ref="myD" v-show="show">
+      <span>图书id:{{detailObj.id}}</span>
+      <br>
+      <span>书名:{{detailObj.bookname}}</span>
+      <br>
+      <span>作者:{{detailObj.author}}</span>
+      <br>
+      <span>出版社:{{detailObj.publisher}}</span>
+      <br>
+    </div>
   </div>
 </template>
 
@@ -34,8 +43,13 @@ export default {
     return {
       booklist: [],
       bookname: "",
-      msg:'',
-      show:false
+      show:false,
+      detailObj:{
+        id:'',
+        bookname:'',
+        author:'',
+        publisher:''
+      }
     };
   },
   mounted() {
@@ -71,26 +85,26 @@ export default {
       // this.booklist.splice(index, 1);
     },
     detail(id) {
-      this.show = true;
+      this.show = !this.show;
       const index = this.booklist.findIndex(ele => ele.id == id);
       console.log(this.booklist[index]);
-      this.$refs.myD.innerHTML = JSON.stringify(this.booklist[index]);
+      this.detailObj.id=this.booklist[index].id
+      this.detailObj.bookname=this.booklist[index].bookname
+      this.detailObj.author=this.booklist[index].author
+      this.detailObj.publisher=this.booklist[index].publisher
     }
   }
 };
 </script>
 
-<style scoped>
+<style>
 #form {
   width: 1000px;
 }
 #detals {
   width: 200px;
-  /* height: 200px; */
-  /* background-color: pink; */
   position: relative;
   left: 800px;
-  text-align: center;
-  /* display: none; */
+  /* text-align: center; */
 }
 </style>
